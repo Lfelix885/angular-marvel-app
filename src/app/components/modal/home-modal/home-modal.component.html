@@ -1,0 +1,21 @@
+<mat-dialog-content class="mat-typography"> 
+    <h1 mat-dialog-title>{{ data.nome }}</h1>
+
+    <div>
+      <h5>{{ data.desc == "" ? "Personagem sem descrição" : data.desc }}</h5>
+    </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-raised-button (click)="maisInfo()" color="warn">
+    Mais informações
+  </button>
+  <button
+    class="closeBtn"
+    (click)="fecharModal()"
+    mat-stroked-button
+    color="warn"
+  >
+    Fechar
+  </button>
+</mat-dialog-actions>

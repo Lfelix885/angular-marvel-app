@@ -1,0 +1,41 @@
+table {
+  width: 100%;
+  height: 200px;
+  overflow: scroll;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+td,
+th {
+  text-align: left;
+  padding: 1rem;
+}
+
+td {
+  border-top: 0.5px solid #dddddd;
+}
+
+.pagination {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+
+  p{
+    margin: 0px;
+  }
+}
+
+.mat-form-field.mat-focused .mat-form-field-ripple {
+  background-color: #ee1a1a;
+}
+.mat-form-field.mat-focused.mat-primary .mat-select-arrow {
+  color: #ee1a1a;
+}
+.mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {
+  color: #ee1a1a;
+}

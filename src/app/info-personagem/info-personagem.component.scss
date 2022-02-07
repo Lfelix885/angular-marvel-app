@@ -1,0 +1,14 @@
+section{
+    margin: 1rem;
+    display: grid;
+    padding-bottom: 1rem;
+    grid-template-columns: 1fr 1fr;
+    border-bottom: 0.5px solid #dddddd;
+
+    h3{
+        align-self: center;
+    }
+    img{
+        margin-left: 1rem;
+    }
+}

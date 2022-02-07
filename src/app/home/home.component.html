@@ -1,0 +1,63 @@
+<app-header></app-header>
+<div style="margin: 0px 30px; padding-top: 30px; padding-bottom: 30px">
+  <h1 style="text-align: center; font-weight: 800; font-size: 30px">
+    Coleção Marvel
+  </h1>
+
+  <div style="display: flex;align-items: center ;justify-content: center; width: 95vw; height: 100vh; position: absolute;">
+    <mat-spinner *ngIf="loading" color="warn"></mat-spinner>
+  </div>
+
+  <!-- <mat-form-field appearance="fill">
+    <mat-label>Procure um herói</mat-label>
+    <input
+      matInput
+      (keyup)="applyFilter($event)"
+      appearence="standard"
+      #input
+    />
+  </mat-form-field> -->
+
+  <mat-card *ngIf="showTable">
+    <mat-form-field appearance="fill" style="width: 63px">
+      <mat-select [(ngModel)]="itemsPerPage">
+        <mat-option value="5">5</mat-option>
+        <mat-option value="10">10</mat-option>
+        <mat-option value="20">20</mat-option>
+        <mat-option value="50">50</mat-option>
+        <mat-option value="100">100</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <label style="margin-left: 10px">Itens por página</label>
+
+    <table>
+      <th>Nome</th>
+      <th>Informações</th>
+      <tr style="border-top: 1px solid red" *ngFor="let i of dt">
+        <td>{{ i.name }}</td>
+        <td>
+          <button (click)="openCharacterModal(i)" mat-icon-button color="warn">
+            <mat-icon>remove_red_eye</mat-icon>
+          </button>
+        </td>
+      </tr>
+    </table>
+
+    <div class="pagination">
+      <button (click)="pagination(-1)"mat-icon-button color="warn">
+        <mat-icon>arrow_back_ios</mat-icon>
+      </button>
+      <p>página: {{ actualPage }}</p>
+      <button (click)="pagination(1)" mat-icon-button color="warn">
+        <mat-icon>arrow_forward_ios</mat-icon>
+      </button>
+      <p>
+        Exibindo {{ (actualPage - 1) * itemsPerPage + 1 }} até
+        {{ actualPage * itemsPerPage }} de {{ totalItems }}
+      </p>
+    </div>
+  </mat-card>
+</div>
+<!-- <footer>
+  <app-footer></app-footer>
+</footer> -->
