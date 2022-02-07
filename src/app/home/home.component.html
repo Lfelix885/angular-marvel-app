@@ -8,7 +8,7 @@
     <mat-spinner *ngIf="loading" color="warn"></mat-spinner>
   </div>
 
-  <!-- <mat-form-field appearance="fill">
+  <mat-form-field appearance="fill">
     <mat-label>Procure um herói</mat-label>
     <input
       matInput
@@ -16,13 +16,13 @@
       appearence="standard"
       #input
     />
-  </mat-form-field> -->
+  </mat-form-field>
 
   <mat-card *ngIf="showTable">
     <mat-form-field appearance="fill" style="width: 63px">
-      <mat-select [(ngModel)]="itemsPerPage">
+      <mat-select [(ngModel)]="itemsPerPage" placeholder="10" (selectionChange)="loadData()">
         <mat-option value="5">5</mat-option>
-        <mat-option value="10">10</mat-option>
+        <mat-option value="10" selected>10</mat-option>
         <mat-option value="20">20</mat-option>
         <mat-option value="50">50</mat-option>
         <mat-option value="100">100</mat-option>
@@ -44,20 +44,17 @@
     </table>
 
     <div class="pagination">
-      <button (click)="pagination(-1)"mat-icon-button color="warn">
+      <button [disabled]="actualPage === 0" (click)="pagination(-1)"mat-icon-button color="warn">
         <mat-icon>arrow_back_ios</mat-icon>
       </button>
-      <p>página: {{ actualPage }}</p>
+      <p>página: {{ actualPage + 1 }}</p>
       <button (click)="pagination(1)" mat-icon-button color="warn">
         <mat-icon>arrow_forward_ios</mat-icon>
       </button>
       <p>
-        Exibindo {{ (actualPage - 1) * itemsPerPage + 1 }} até
-        {{ actualPage * itemsPerPage }} de {{ totalItems }}
+        Exibindo {{ (actualPage + 1) * itemsPerPage  }} de {{ totalItems }}
       </p>
     </div>
   </mat-card>
 </div>
-<!-- <footer>
-  <app-footer></app-footer>
-</footer> -->
+

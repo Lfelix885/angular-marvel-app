@@ -1,4 +1,10 @@
-import { Component, OnInit, ViewChild, Inject, ViewEncapsulation} from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  Inject,
+  ViewEncapsulation,
+} from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { HomeService } from './../services/home/home.service';
@@ -11,8 +17,7 @@ import { ToastrService } from 'ngx-toastr';
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
-  encapsulation: ViewEncapsulation.None
-
+  encapsulation: ViewEncapsulation.None,
 })
 export class HomeComponent implements OnInit {
   dataSource: any;
@@ -24,7 +29,7 @@ export class HomeComponent implements OnInit {
   showTable = false;
   filtro: string;
   itemsPerPage = 10;
-  actualPage = 0;
+  actualPage = 0  ;
 
   constructor(
     private toast: ToastrService,
@@ -38,13 +43,13 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.loading = true;
 
-    this.loadData((this.limit), (this.offset));
+    this.loadData();
   }
 
   currentPage() {}
 
-  loadData(limit?: number, offset?: number) {
-    this.homeService.getPersonagens(limit, offset).subscribe(
+  loadData() {
+    this.homeService.getPersonagens(this.limit, this.offset).subscribe(
       (res) => {
         this.loading = false;
         this.showTable = true;
@@ -59,30 +64,27 @@ export class HomeComponent implements OnInit {
     );
   }
 
-  pagination(index:any){
+  pagination(index: any) {
     this.actualPage += index;
     this.limit = this.itemsPerPage;
 
-    this.offset = this.actualPage? this.actualPage * this.limit : 0
-    console.log(this.dataSource)
-    this.homeService.getPersonagens(this.limit,this.offset).subscribe(
+    this.offset = this.actualPage ? this.actualPage * this.limit : 0;
+    this.homeService.getPersonagens(this.limit, this.offset).subscribe(
       (res) => {
-        this.showTable=true;
+        this.showTable = true;
         this.results = res.data.results;
-        this.totalItems = res.data.total
+        this.totalItems = res.data.total;
       },
       (err) => {
-        this.toast.error('Não foi possivel carregar os dados','Erro')
+        this.toast.error('Não foi possivel carregar os dados', 'Erro');
       }
     );
-   }
-id:any
+  }
+  id: any;
   openCharacterModal(element: Results) {
     this.id = element.id;
-    // console.log(id)
     this.homeService.getPersonagemPeloId(this.id).subscribe((res) => {
       let personagem = res.data.results;
-      console.log(personagem);
       personagem.map((x: CharacterResults) => {
         let modalRef = this.modalHero.open(HomeModalComponent, {
           width: '400px',
@@ -101,7 +103,7 @@ id:any
     if (this.filtro) {
       return this.results.filter((x: any) =>
         x.name.includes(
-          this.filtro.toLocaleLowerCase() || this.filtro.toUpperCase()
+          this.filtro
         )
       );
     }
